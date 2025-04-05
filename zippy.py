@@ -43,3 +43,6 @@ def extract_from_zip(zip_file_path, extract_to_folder):
     except Exception as e:
         print(f"Error extracting file: {str(e)}")
 
+
+
+extract_from_zip("./uploads/Octoprint.zip", "./uploads/OP.usd")

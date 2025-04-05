@@ -13,9 +13,25 @@ if not os.path.exists(UPLOAD_FOLDER):
 def home():
     return render_template("index.html")
 
-@app.route('/zip')
+@app.route('/zip', methods=['POST'])
 def zipfile():
-    return send_file('test.zip', as_attachment=True)
+    if request.method == 'POST':
+        http = request.body
+        # https://tedboy.github.io/flask/generated/generated/flask.Request.html
+        fname = http.filename
+        fpath = os.path.join(UPLOAD_FOLDER, fname)
+        http.save(fpath)
+
+        extract_from_zip(fpath, f"{UPLOAD_FOLDER}/extracted_{fname}")
+
+        f = open(f"{UPLOAD_FOLDER}/extracted_{fname}", "r")
+        print(f.read())
+
+        # Send the zip file back to the client
+        return send_file(f"{UPLOAD_FOLDER}/extracted_{fname}", as_attachment=True)
+
+
+    return "Nope"
 
 @app.route('/f', methods=['GET', 'POST'])
 def receive_file():
