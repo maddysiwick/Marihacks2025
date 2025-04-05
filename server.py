@@ -40,12 +40,12 @@ def receive_file():
         except Exception as e:
             return f'Error processing the uploaded file: {str(e)}', 500
 
-    finally:
-        if 'file_to_return_path' in locals() and os.path.exists(file_to_return_path):
-            try:
-                os.remove(file_to_return_path)
-            except PermissionError:
-                print(f"Could not delete file: {file_to_return_path}")
+        finally:
+            if 'file_to_return_path' in locals() and os.path.exists(file_to_return_path):
+                try:
+                    os.remove(file_to_return_path)
+                except PermissionError:
+                    print(f"Could not delete file: {file_to_return_path}")
 
 
 send_path = "/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/test.txt.zip"
