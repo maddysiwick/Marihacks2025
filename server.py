@@ -13,8 +13,11 @@ if not os.path.exists(UPLOAD_FOLDER):
 def home():
     return render_template("index.html")
 
+@app.route('/zip')
+def zipfile():
+    return send_file('test.zip', as_attachment=True)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/f', methods=['GET', 'POST'])
 def receive_file():
     if request.method == 'POST':
         f = request.files['file']
