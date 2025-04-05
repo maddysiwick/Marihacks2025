@@ -1,5 +1,6 @@
 from flask import Flask, request, send_file, render_template
 import os, requests
+import tempfile
 
 app = Flask(__name__)
 
@@ -14,21 +15,13 @@ def home():
 
 @app.route('/receive_file', methods=['POST'])
 def receive_file():
-
-
-
     f = request.files['file']
-    
-
     try:
-        # Save the received file temporarily (optional, depending on your needs)
-        filepath = os.path.join(UPLOAD_FOLDER, f.filename)
-        f.save(filepath)
-
-        # --- Logic to determine the file to return goes here ---
-        # For this example, we'll just return the received file back
-        file_to_return_path = filepath
-        return_filename = f.filename
+        # Save the received file temporarily
+        with tempfile.NamedTemporaryFile(delete=False, dir=UPLOAD_FOLDER) as temp_file:
+            f.save(temp_file.name)
+            file_to_return_path = temp_file.name
+            return_filename = f.filename
 
         if os.path.exists(file_to_return_path):
             return send_file(
@@ -43,9 +36,11 @@ def receive_file():
         return f'Error processing the uploaded file: {str(e)}', 500
 
     finally:
-        # Clean up the temporarily saved file (optional)
-        if 'filepath' in locals() and os.path.exists(filepath):
-            os.remove(filepath)
+        if 'file_to_return_path' in locals() and os.path.exists(file_to_return_path):
+            try:
+                os.remove(file_to_return_path)
+            except PermissionError:
+                print(f"Could not delete file: {file_to_return_path}")
 
 
 send_path = "/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/test.txt.zip"
