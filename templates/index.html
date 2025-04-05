@@ -6,11 +6,41 @@
     <title>Document</title>
 </head>
 <body>
+    
     <form action="{{url_for('receive_file')}}" method="post" enctype="multipart/form-data">
+
         <input type="file" name="file">
         <input type="submit" value="Upload File">
 
+
+        
     </form>
+
+    <button id="sendZipButton">Send Zip File</button>
+    <h1 id="t"></h1>
+
+<script>
+    document.getElementById("sendZipButton").addEventListener("click", function() {
+        fetch('/send_zip_file', {
+            method: 'POST',
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // Display the server's response
+        })
+        .catch(error => {
+            // document.getElementById("t").innerText = "Error: " + error;
+            // alert('Failed to send the zip file.');
+        });
+    });
+</script>
+
+
+
+    
+
+    
+
     
 </body>
 </html>
