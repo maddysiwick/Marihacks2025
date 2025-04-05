@@ -3,7 +3,7 @@ import os, requests
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/Marihacks2025/uploads'  # Directory to temporarily store received files
+UPLOAD_FOLDER = "C:/Users/SurfacePro/Code/Marihacks2025'  # Directory to temporarily store received files"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -48,7 +48,7 @@ def receive_file():
             os.remove(filepath)
 
 
-send_path = "/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/test.txt.zip"
+send_path = "C:/Users/SurfacePro/Code/Marihacks2025/test.txt.zip"
 @app.route('/send_zip_file', methods=['POST'])
 def send_zip_file(zip_file_path=send_path, url="http://127.0.0.1:5001/receive_file"):
     """
