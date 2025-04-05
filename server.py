@@ -5,7 +5,7 @@ from zippy import compress_to_zip, extract_from_zip
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/Marihacks2025/uploads'  # Directory to temporarily store received files
+UPLOAD_FOLDER = "C:/Users/SurfacePro/Code/Marihacks2025'  # Directory to temporarily store received files"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -54,20 +54,7 @@ def receive_file():
 #     """
 #     Sends a POST request with a zip file attached.
 
-#     :param zip_file_path: Path to the zip file to be sent.
-#     :param url: The URL to send the POST request to.
-#     :return: Response from the server.
-#     """
-#     try:
-#         with open(zip_file_path, 'rb') as f:
-#             files = {'file': (os.path.basename(zip_file_path), f, 'application/zip')}
-#             response = requests.post(url, files=files)
-#             response.raise_for_status()  # Raise an exception for bad status codes
-#             return response.text
-#     except FileNotFoundError:
-#         return f"Error: Zip file not found at {zip_file_path}"
-#     except requests.exceptions.RequestException as e:
-#         return f"Error during file upload: {e}"
+
 
 if __name__ == '__main__':
     # Example usage:
