@@ -4,7 +4,7 @@ import tempfile
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/Marihacks2025/uploads'  # Directory to temporarily store received files
+UPLOAD_FOLDER = '/Users/madeleinesiwick/python_bs/Marihacks25/Marihacks2025/uploads'  # Directory to temporarily store received files
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -33,7 +33,7 @@ def receive_file():
             return 'Error: File to return not found on the server', 500
 
     except Exception as e:
-        return f'Error processing the uploaded file: {str(e)}', 500
+        return 'Error processing the uploaded file', 500
 
     finally:
         if 'file_to_return_path' in locals() and os.path.exists(file_to_return_path):
@@ -43,7 +43,7 @@ def receive_file():
                 print(f"Could not delete file: {file_to_return_path}")
 
 
-send_path = "/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/test.txt.zip"
+send_path = "/Users/madeleinesiwick/python_bs/Marihacks25/Marihacks2025/test.txt.zip"
 @app.route('/send_zip_file', methods=['POST'])
 def send_zip_file(zip_file_path=send_path, url="http://127.0.0.1:5001/receive_file"):
     """
