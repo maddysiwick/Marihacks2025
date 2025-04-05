@@ -5,7 +5,7 @@ from zippy import compress_to_zip, extract_from_zip
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = "C:/Users/SurfacePro/Code/Marihacks2025'  # Directory to temporarily store received files"
+UPLOAD_FOLDER = "/Users/xyc/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programs/Python/MariHacks/Marihacks2025/uploads"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -35,7 +35,7 @@ def receive_file():
                     download_name=return_filename
                 )
             else:
-                return 'Error: File to return not found on the server', 500
+                return 'Error: File to return ot found on the server', 500
 
         except Exception as e:
             return f'Error processing the uploaded file: {str(e)}', 500
@@ -58,4 +58,4 @@ def receive_file():
 
 if __name__ == '__main__':
     # Example usage:
-    app.run(debug=True, port=5002, host="0.0.0.0", use_reloader=False) # Choose a port
+    app.run(debug=True, port=5002, host="0.0.0.0", use_reloader=False) 
